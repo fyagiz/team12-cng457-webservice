@@ -9,10 +9,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
-public class Phone {
+@PrimaryKeyJoinColumn(name = "phoneID")
+public class Phone extends Product{
 
     private String internalMemory;
-    @OneToOne
-    private Product product;
+
 }

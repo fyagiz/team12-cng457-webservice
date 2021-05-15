@@ -9,9 +9,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(name = "productID")
     private int productID;
     private float screenSize;
     private float price;
@@ -20,10 +22,8 @@ public class Product {
     private Brand brand;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<CommentAndRating> commentAndRatingList;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(name="ProductAdditionalFeatureRelationship", joinColumns=@JoinColumn(name = "additionalFeatureID"), inverseJoinColumns=@JoinColumn(name = "productID"))
     private List<AdditionalFeature> additionalFeatureList;
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    private Phone phone;
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    private Computer computer;
+
 }
