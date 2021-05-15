@@ -14,7 +14,7 @@
 	<name>web-service</name>
 	<description>web-service for team 12</description>
 	<properties>
-		<java.version>16</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
