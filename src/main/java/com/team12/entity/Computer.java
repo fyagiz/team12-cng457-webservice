@@ -1,5 +1,7 @@
-package com.team12.team12.entity;
+package com.team12.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @PrimaryKeyJoinColumn(name = "computerID")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "productID")
 public class Computer extends Product{
 
     private String screenResolution;
