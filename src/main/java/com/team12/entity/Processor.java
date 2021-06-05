@@ -1,5 +1,8 @@
-package com.team12.team12.entity;
+package com.team12.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "processorID")
 public class Processor {
 
     @Id
@@ -20,5 +24,6 @@ public class Processor {
     private float clockFrequency;
 
     @OneToMany(mappedBy = "processor", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Computer> computerList;
 }
