@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @PrimaryKeyJoinColumn(name = "phoneID")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "productID")
+@JsonIdentityInfo(scope=Phone.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "productID")
 public class Phone extends Product{
 
     private String internalMemory;

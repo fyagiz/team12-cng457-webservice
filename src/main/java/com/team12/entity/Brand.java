@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "brandID")
+@JsonIdentityInfo(scope=Brand.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "brandID")
 public class Brand {
 
     @Id
@@ -23,4 +23,8 @@ public class Brand {
     private List<Product> productList;
 
 
+    public Brand(int i, String apple) {
+        this.brandID=i;
+        this.brandName=apple;
+    }
 }

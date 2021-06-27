@@ -9,7 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "commentAndRatingID")
+@JsonIdentityInfo(scope=CommentAndRating.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "commentAndRatingID")
 public class CommentAndRating{
 
     @Id

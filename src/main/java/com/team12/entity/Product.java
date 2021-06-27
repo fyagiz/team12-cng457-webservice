@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "productID")
+@JsonIdentityInfo(scope=Product.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "productID")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

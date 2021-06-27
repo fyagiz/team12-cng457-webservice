@@ -17,11 +17,45 @@ public class PhoneController {
     @Autowired
     AdditionalFeatureService additionalFeatureService;
 
+    /***
+     * This is a post method which allows to save the computer object.
+     * An example usage is as follows: {@code savePhone({
+     *     "screenSize":18.3,
+     *     "price":5000,
+     *     "model":"iPhone XR",
+     *     "internalMemory":"64 GB",
+     *     "brand":{
+     *         "brandID":1,
+     *         "brandName":"Apple"
+     *     },
+     *
+     *     "additionalFeatureList":[
+     *         {
+     *             "additionalFeatureID":4,
+     *             "additionalFeature":"Fingerprint"
+     *         },
+     *           {
+     *             "additionalFeatureID":3,
+     *             "additionalFeature":"Face recognition"
+     *         }
+     *
+     *     ]
+     * });}
+     * @param newPhone represents the new computer object that is being post to the service.
+     * @return new Phone object that is taken from the service.
+     */
     @PostMapping("/addPhone")
     public Phone savePhone(@RequestBody Phone newPhone){
         return phoneService.savePhone(newPhone);
     }
 
+    /***
+     * This is the method which allows to update the phone object by adding the new additional feature to it.
+     * An example usage is as follows: {@code updatePhone(1,4);}
+     * @param phoneId represents the ID of the computer that is being updated as integer.
+     * @param afId represents the additional feature ID of the additional feature object that is being added to the computer as integer.
+     * @return new Phone object that has new additional feature and taken from service.
+     */
     @GetMapping("/updatePhone/addAdditionalFeatures/{phoneId}/{afId}")
     public Phone updatePhone(@PathVariable int phoneId, @PathVariable int afId){
         Phone tempPhone= phoneService.getPhoneById(phoneId);
@@ -30,20 +64,58 @@ public class PhoneController {
         return phoneService.savePhone(tempPhone);
     }
 
+    /***
+     * This is the method which allows to get the all the phones.
+     * An example usage is as follows: {@code getPhones();}
+     * @return Phone Objects that are taken from the service.
+     */
+
     @GetMapping("/getPhones")
     public List<Phone> getPhones(){
         return phoneService.getPhones();
     }
+
+    /***
+     * This is the get method which allows to get the phone object by sending the following parameter.
+     * An example usage is as follows: {@code getPhoneById(1);}
+     * @param productID represents the ID of the phone object that is being sent to the service as integer.
+     * @return Phone object that is taken from the service according to the product ID.
+     */
 
     @GetMapping("/getPhone/{productID}")
     public Phone getPhoneById(@PathVariable int productID){
         return phoneService.getPhoneById(productID);
     }
 
+    /***
+     * This is the get  method which allows to get the all phones that have the following parameter.
+     * An example usage is as follows: {@code getPhoneByBrandName("Apple");}
+     * @param brandName represents the value of  name of the brand that is sent to the service as string.
+     * @return Phone objects that are taken from from the service according to brand name.
+     */
     @GetMapping("/getPhones/{brandName}")
     public List<Phone> getPhoneByBrandName(@PathVariable String brandName){
         return phoneService.getPhoneByBrandName(brandName);
     }
+
+    /***
+     * This is the method that allows to get the all phones by searching the following parameters.
+     * An example usage is as follows: {@code getPhonesForSearch(1,samsung);}
+     * @param phoneID represents the value of the ID of the phone to be search as integer.
+     * @param screenSize represents the value of the screen size of the phone to be search as float.
+     * @param price represents the value of the price of the phone to be search as float.
+     * @param model represents the value of the model name of the phone to be search as string.
+     * @param brandName represents the value of the bran name of the phone to be search as string.
+     * @param internalMemory represents the value of the internal memory of the phone to be search as string.
+     * @param priceMin represents the minimum value of the price of the phone to be search as float.
+     * @param priceMax represents the maximum value of the price of the phone to be search as float.
+     * @param internalMemoryMin represents the minimum value of the internal memory of the phone to be search as stirng.
+     * @param internalMemoryMax represents the maximum value of the internal memory of the phone to be search as string.
+     * @param additionalFeature represents the value of the additional feature of the phone to be search as string.
+     * @param comment represents the value of the comment of the phone to be search as string.
+     * @param rating represents the value of the rating of the phone to be search as integer.
+     * @return Phone Objects which provides the given parameters as search parameters.
+     */
 
     @GetMapping("/getPhonesForSearch")
     public List<Phone> getPhonesForSearch(@RequestParam(required = false) Integer phoneID,
