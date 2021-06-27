@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "processorID")
+@JsonIdentityInfo(scope=Processor.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "processorID")
 public class Processor {
 
     @Id

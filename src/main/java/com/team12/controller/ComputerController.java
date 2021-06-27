@@ -11,16 +11,44 @@ import java.util.List;
 
 @RestController
 public class ComputerController {
+
+
     @Autowired
     ComputerService computerService;
 
     @Autowired
     AdditionalFeatureService additionalFeatureService;
 
+    /***
+     * This is the post method which allows to save the new computer object.
+     * An example usage is as follows: {@code saveComputer({
+     *   "screenResolution":"1024x768",
+     *    "storageCapacity":"128 GB",
+     *    "computerMemory":"1 GB",
+     *    "screenSize":16.3,
+     *    "model":"Asus VivoBook S",
+     *    "brand":{
+     *    "brandID":1},
+     *    "price":10000,
+     *    "processor":  {
+     *         "processorID": 2
+     *     }
+     * });}
+     * @param newComputer-represents the new computer object that is being send to the computer list.
+     * @return new Computer object that is taken from the service.
+     */
     @PostMapping("/addComputer")
     public Computer savePhone(@RequestBody Computer newComputer){
         return computerService.saveComputer(newComputer);
     }
+
+    /***
+     * This is the method which allows to update the computer's additional features by adding the following parameters.
+     * An example usage is as follows: {@code updateComputer(1,3);}
+     * @param computerID-represents the  ID of the computer that is being updated as integer.
+     * @param afId-represents the new additional feature ID of the computer that is being added to the computer object as integer.
+     * @return new Computer object that has the new additional feature that is taken from the service.
+     */
 
     @GetMapping("/updateComputer/addAdditionalFeatures/{computerID}/{afId}")
     public Computer updateComputer(@PathVariable int computerID, @PathVariable int afId){
@@ -30,15 +58,35 @@ public class ComputerController {
         return computerService.saveComputer(tempComputer);
     }
 
+    /***
+     * This is the get method which allows to get all the computers from database.
+     * An example usage is as follows: {@code getComputers();}
+     * @return Computer objects that are taken from the service.
+     */
+
     @GetMapping("/getComputers")
     public List<Computer> getComputers(){
         return computerService.getComputers();
     }
 
+    /***
+     * This is the get method which allows to get the specific computer object by sending the following parameter.
+     * An example usage is as follows: {@code getComputerById(1);}
+     * @param productID represents the value of the computer ID that is to be taken from service as integer.
+     * @return Computer object that is taken from service by given specific ID.
+     */
+
     @GetMapping("/getComputer/{productID}")
     public Computer getComputerById(@PathVariable int productID){
         return computerService.getComputerById(productID);
     }
+
+    /***
+     * This is the method which allows to get the all the computers by sending the following parameter.
+     * An example usage is as follows: {@code getComputerByBrandName("Asus");}
+     * @param brandName represents the value of a brand name that is being sent to the service as string.
+     * @return Computer objects that are taken from the service by given brand name.
+     */
 
     @GetMapping("/getComputers/{brandName}")
     public List<Computer> getComputerByBrandName(@PathVariable String brandName){
@@ -46,8 +94,30 @@ public class ComputerController {
     }
 
 
-
-   
+    /***
+     * This is the get method which allows to get the computers with search criteria. The method checks each of the following parameters.
+     * An example usage is as follows: {@code getComputerForSearch(1,"Asus");}
+     * @param computerID represents the value of ID for the computer to be search for as integer.
+     * @param screenSize represents the value of screen size for the computer to be searched as float.
+     * @param price represents the value of price for the computer to be searched as float.
+     * @param model represents the value of model name for the computer to be searched as string.
+     * @param brandName represents the value of brand name for the computer to be searched as string.
+     * @param computerMemory represents the value of computer memory for the computer to be searched as string.
+     * @param priceMin represents the value of minimum price for the computer to be searched as float.
+     * @param priceMax represents the value of maximum price for the computer to be searched as float.
+     * @param computerMemoryMin represents the value of minimum of the computer memory for the computer to be searched as string.
+     * @param computerMemoryMax represents the value of maximum  of the computer memory for the computer to be searched as string.
+     * @param additionalFeature represents the value of additional feature for the computer to be searched as string.
+     * @param storageCapacity represents the value of storage capacity for the computer to be searched as string.
+     * @param storageCapacityMin represents the value of minimum storage capacity for the computer to be searched as string.
+     * @param storageCapacityMax represents the value of maximum storage capacity for the computer to be searched as string.
+     * @param screenResolution represents the value of screen resolution for the computer to be searched as string.
+     * @param processorModelName represents the value of name of the processor for the computer to be searched as string.
+     * @param processorClockFrequency represents the value of frequency of the processor for the computer to be searched as float.
+     * @param comment represents the value of comment for the computer to be searched as string.
+     * @param rating represents the value of rating for the computer to be searched as integer.
+     * @return Computer objects that are taken from the service according to searching parameters.
+     */
 
     @GetMapping("/getComputerForSearch")
     public List<Computer> getComputerForSearch(@RequestParam(required = false) Integer computerID,

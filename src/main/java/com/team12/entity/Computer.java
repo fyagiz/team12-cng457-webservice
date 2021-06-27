@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @PrimaryKeyJoinColumn(name = "computerID")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "productID")
+@JsonIdentityInfo(scope=Computer.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "productID")
 public class Computer extends Product{
 
     private String screenResolution;
